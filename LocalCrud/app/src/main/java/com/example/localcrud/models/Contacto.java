@@ -3,7 +3,7 @@ package com.example.localcrud.models;
 public class Contacto {
     int id = 0;
     String nombre = "";
-    String telefofno = "";
+    String telefono = "";
     String correo = "";
     int edad = 0;
 
@@ -15,10 +15,17 @@ public class Contacto {
         this.id = id;
     }
 
-    public Contacto(int id, String nombre, String telefofno, String correo, int edad) {
+    public Contacto(String nombre, String telefono, String correo, int edad) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.edad = edad;
+    }
+
+    public Contacto(int id, String nombre, String telefono, String correo, int edad) {
         this.id = id;
         this.nombre = nombre;
-        this.telefofno = telefofno;
+        this.telefono = telefono;
         this.correo = correo;
         this.edad = edad;
     }
@@ -39,12 +46,12 @@ public class Contacto {
         this.nombre = nombre;
     }
 
-    public String getTelefofno() {
-        return telefofno;
+    public String getTelefono() {
+        return telefono;
     }
 
     public void setTelefofno(String telefofno) {
-        this.telefofno = telefofno;
+        this.telefono = telefofno;
     }
 
     public String getCorreo() {
