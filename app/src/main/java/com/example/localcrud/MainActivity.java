@@ -37,8 +37,9 @@ public class MainActivity extends AppCompatActivity {
         this.adaptador = new Adaptador(this.list,this,this.obj_cont);
 
         //acceso a vistas y elementos de vista
-        ListView lista = findViewById(R.id.lista);
+        final ListView lista = findViewById(R.id.lista);
         Button agregar = findViewById(R.id.agregar);
+        lista.setAdapter(this.adaptador);
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -63,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 final EditText email = dialogo.findViewById(R.id.email);
                 final EditText edad = dialogo.findViewById(R.id.edad);
 
-                guardar = dialogo.findViewById(R.id.agregar);
-                cancelar = dialogo.findViewById(R.id.cancelar);
+                guardar = dialogo.findViewById(R.id.d_agregar);
+                cancelar = dialogo.findViewById(R.id.d_cancelar);
 
                 //eventos a botones de dialogo
                 guardar.setOnClickListener(new View.OnClickListener() {
@@ -78,12 +79,17 @@ public class MainActivity extends AppCompatActivity {
 
                             c = new Contacto(nm,tl,corr,age);
 
+
                             try {
                                 obj_cont.insertar(c);
-                                Toast.makeText(getApplication(),"Registro guardado",Toast.LENGTH_LONG);
+                                adaptador.notifyDataSetChanged();
+                                Toast.makeText(getApplication(),"Registro guardado",Toast.LENGTH_LONG).show();
+                                list = obj_cont.verTodos();
+                                dialogo.dismiss();
+
 
                             }catch (Exception e){
-                                Toast.makeText(getApplication(),"No se pudo insertar el registro",Toast.LENGTH_LONG);
+                                Toast.makeText(getApplication(),"No se pudo insertar el registro",Toast.LENGTH_LONG).show();
                             }
                             list = obj_cont.verTodos();
 

@@ -45,7 +45,21 @@ public class DAO_Contacto {
     }
 
     public boolean editar(Contacto cont){
-        return true;
+        try{
+            ContentValues contenedor = new ContentValues();
+
+            contenedor.put("nombre",cont.getNombre());
+            contenedor.put("telefono",cont.getTelefono());
+            contenedor.put("email",cont.getCorreo());
+            contenedor.put("edad",cont.getEdad());
+
+            this.db.update("contacto",contenedor,"id="+cont.getId(),null);
+
+            return true;
+
+        }catch (Exception e){
+            return false;
+        }
     }
 
     public ArrayList<Contacto> verTodos(){

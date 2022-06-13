@@ -7,7 +7,7 @@ public class Contacto {
     String correo = "";
     int edad = 0;
 
-    public Contacto(){
+    public Contacto() {
 
     }
 
@@ -50,8 +50,8 @@ public class Contacto {
         return telefono;
     }
 
-    public void setTelefofno(String telefofno) {
-        this.telefono = telefofno;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getCorreo() {
@@ -68,5 +68,16 @@ public class Contacto {
 
     public void setEdad(int edad) {
         this.edad = edad;
+    }
+
+    @Override
+    public String toString() {
+        return "Contacto{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", correo='" + correo + '\'' +
+                ", edad=" + edad +
+                '}';
     }
 }
