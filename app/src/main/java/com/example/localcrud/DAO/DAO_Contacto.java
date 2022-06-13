@@ -41,7 +41,16 @@ public class DAO_Contacto {
     }
 
     public boolean eliminar(int id){
-        return true;
+
+        try {
+
+            db.delete("contacto","id="+id,null);
+            return true;
+
+        }catch (Exception e){
+            e.toString();
+            return false;
+        }
     }
 
     public boolean editar(Contacto cont){
