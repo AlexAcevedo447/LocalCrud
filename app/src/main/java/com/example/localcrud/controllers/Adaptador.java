@@ -1,8 +1,10 @@
 package com.example.localcrud.controllers;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -136,7 +138,7 @@ public class Adaptador extends BaseAdapter {
                 nombre.setText(obj.getNombre());
                 telefono.setText(obj.getTelefono());
                 email.setText(obj.getCorreo());
-                edad.setText(obj.getEdad());
+                edad.setText(""+obj.getEdad());
 
                 //eventos a botones de dialogo
                 guardar.setOnClickListener(new View.OnClickListener() {
@@ -181,7 +183,27 @@ public class Adaptador extends BaseAdapter {
         this.eliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int position = Integer.parseInt(v.getTag().toString());
+                obj = lista.get(position);
+                setId(obj.getId());
+                AlertDialog.Builder alert = new AlertDialog.Builder(a);
+                alert.setMessage("¿Estas seguro que deseas eliminar el registro? No hay marcha atrás si lo haces");
+                alert.setCancelable(false);
+                alert.setPositiveButton("Sí, de acuerdo", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dao.eliminar(getId());
+                        lista = dao.verTodos();
+                        notifyDataSetChanged();
+                    }
+                });
+                alert.setNegativeButton("No, me arrepentí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
 
+                    }
+                });
+                alert.show();
             }
         });
     }
